@@ -8,6 +8,8 @@
  * npm publish 发布包(public pkg ,private scoped pkg)
  * npm publish --access public 发布包(public scoped pkg)
  * npm versioin 1.0.1 更改当前版本
+ * npm prefix 显示package.json或者node_moudle在的父目录
+ * npm prefix -g 全局的
 
  ### package的创建流程
     1. npm int 创建package.json文件
@@ -30,4 +32,27 @@
     3. 弃用某个版本
         1. npm deprecate pkg-name@version messagge  其他同上
     4. 如果包不想维护了,可以转为npm 拥有
-        1. 命令1 npm owner add npm <package-name>   命令2 npm owner rm <user> <package-name>
+        1. 命令1 npm owner add npm <package-name>   命令2 npm owner rm <user> <package-name> 
+### 模块使用
+    1. npm install pkg-name@version
+    2. npm install pkg-name@version -g
+    3. npm update
+    4. npm outdated 输出版本信息
+    5. npm outdated -g --depth=0 查看全局的包的版本情况
+
+### 代码安全
+    1.npm audit 可以在当前扫描安装包,并生成报告
+    2.EAUDITNOLOCK错误处理
+        1. npm i --package-lock-only 生成package-lock.json
+
+### npm-config
+
+#### 命令行flags
+    1. 命令行 --foo bar 设置foo为bar,--foo 设置foo 为true
+#### 环境变量
+    1. npm_config_foo=bar 设置foo=bar,不区分大小写,NPM_CONFIG_FOO=bar同样
+        *提示在npm-script内部,使用的变量有时会优先使用小写*
+
+
+
+
