@@ -14,14 +14,16 @@
     2. 新建js文件
     3. npm publish 发布
 
-
-### 撤销包
+### package发布
+    1. npm publish 如果是unscope package 就直接发布为public 如果是scope package 就发布为pravite
+    2. npm publish --access public 如果为scope包就需要指定为public
+### 撤销package
     1. npm unpublish [@scope-name/]pkg-name -f --otp=123456 在72小时内撤回发布的版本
         1. 其中otp为 two-authentication 验证
         2. 如果撤销在发布必须更新版本
     2. npm unpublish [@scope-name/]pkg-name@version -f --otp=123456 撤销某版本
 
-### 弃用包
+### 弃用package
     1. 弃用安装包将在search result 检索不到,弃用提示会在package页面显示
     2. 弃用整个安装包
         1. npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
