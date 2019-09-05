@@ -13,3 +13,19 @@
     1. npm int 创建package.json文件
     2. 新建js文件
     3. npm publish 发布
+
+
+### 撤销包
+    1. npm unpublish [@scope-name/]pkg-name -f --otp=123456 在72小时内撤回发布的版本
+        1. 其中otp为 two-authentication 验证
+        2. 如果撤销在发布必须更新版本
+    2. npm unpublish [@scope-name/]pkg-name@version -f --otp=123456 撤销某版本
+
+### 弃用包
+    1. 弃用安装包将在search result 检索不到,弃用提示会在package页面显示
+    2. 弃用整个安装包
+        1. npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
+    3. 弃用某个版本
+        1. npm deprecate pkg-name@version messagge  其他同上
+    4. 如果包不想维护了,可以转为npm 拥有
+        1. 命令1 npm owner add npm <package-name>   命令2 npm owner rm <user> <package-name>
