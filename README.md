@@ -10,8 +10,23 @@
  * npm versioin 1.0.1 更改当前版本
  * npm prefix 显示package.json或者node_moudle在的父目录
  * npm prefix -g 全局的
+ * npm bin 显示当前bin目录的位置
+ * npm bin -g 显示全局bin目录位置
+ * npm login  登录用户
+ * npm whoami 显示登录的用户
 
- ### package的创建流程
+### 操作npm缓存
+ * npm cache add "tarbal file/folder/tarbal url/name@version" 添加一个缓存
+ * npm cache clean -f 清除缓存
+ * npm cache verify 检查缓存
+ * ~/.npm 缓存文件保存位置
+ ### npm-folder
+ * ./node_modules 本地包位置 {prefix}/lib/node_modules(unix) {prefix}/node_modules(window) 全局包位置
+ * {prefix}/bin(unix) {prefix}(window)  可执行js文件的位置
+  备注:1 *如果是一个可执行的包需要在根目录有一个bin目录,package.json需要有一个 bin field*
+
+
+### package的创建流程
     1. npm int 创建package.json文件
     2. 新建js文件
     3. npm publish 发布
@@ -19,6 +34,7 @@
 ### package发布
     1. npm publish 如果是unscope package 就直接发布为public 如果是scope package 就发布为pravite
     2. npm publish --access public 如果为scope包就需要指定为public
+
 ### 撤销package
     1. npm unpublish [@scope-name/]pkg-name -f --otp=123456 在72小时内撤回发布的版本
         1. 其中otp为 two-authentication 验证
@@ -46,13 +62,17 @@
         1. npm i --package-lock-only 生成package-lock.json
 
 ### npm-config
+    1. npm config ls -l 查看npm配置的列表 -l是查看更多
+    2. 命令行输入 --foo=bar 设置foo为bar
+    3. 程序中通过 process.env.npm_config_foo来取值
+    4. .npmrc是npm 的一个配置文件
+    5. 获取package.json的配置项,process.env.npm_package_filedName 
+    6. npm config set foo:port 80 设置package.json name字段为foo的config字段的port值
+### npm-script
+    1. package.json的scripts字段
+    2. 当依赖的模块含有可执行脚本,在npm install时候将会添加到node_moudles/.bin
 
-#### 命令行flags
-    1. 命令行 --foo bar 设置foo为bar,--foo 设置foo 为true
-#### 环境变量
-    1. npm_config_foo=bar 设置foo=bar,不区分大小写,NPM_CONFIG_FOO=bar同样
-        *提示在npm-script内部,使用的变量有时会优先使用小写*
-
-
-
-
+### package.json
+    1. files字段, 是一个数组,包含的文件在npm pack 的时候会打成tarball,如果作为依赖包,可以供用户安装使用
+        *默认包含package.json/README/CHANGES / CHANGELOG / HISTORY/LICENSE / LICENCE/NOTICE/The file in the “main” field
+        *默认不包含......省略.....
