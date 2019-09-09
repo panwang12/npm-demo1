@@ -27,52 +27,53 @@
 
 
 ### package的创建流程
-    1. npm int 创建package.json文件
-    2. 新建js文件
-    3. npm publish 发布
+ 1. npm int 创建package.json文件
+ 2. 新建js文件
+ 3. npm publish 发布
 
 ### package发布
-    1. npm publish 如果是unscope package 就直接发布为public 如果是scope package 就发布为pravite
-    2. npm publish --access public 如果为scope包就需要指定为public
+ 1. npm publish 如果是unscope package 就直接发布为public 如果是scope package 就发布为pravite
+ 2. npm publish --access public 如果为scope包就需要指定为public
 
 ### 撤销package
-    1. npm unpublish [@scope-name/]pkg-name -f --otp=123456 在72小时内撤回发布的版本
-        1. 其中otp为 two-authentication 验证
-        2. 如果撤销在发布必须更新版本
-    2. npm unpublish [@scope-name/]pkg-name@version -f --otp=123456 撤销某版本
+ 1. npm unpublish [@scope-name/]pkg-name -f --otp=123456 在72小时内撤回发布的版本
+  * 其中otp为 two-authentication 验证
+  * 如果撤销在发布必须更新版本
+ 2. npm unpublish [@scope-name/]pkg-name@version -f --otp=123456 撤销某版本
 
 ### 弃用package
-    1. 弃用安装包将在search result 检索不到,弃用提示会在package页面显示
-    2. 弃用整个安装包
-        1. npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
-    3. 弃用某个版本
-        1. npm deprecate pkg-name@version messagge  其他同上
-    4. 如果包不想维护了,可以转为npm 拥有
-        1. 命令1 npm owner add npm <package-name>   命令2 npm owner rm <user> <package-name> 
+ 1. 弃用安装包将在search result 检索不到,弃用提示会在package页面显示
+ 2. 弃用整个安装包
+    * npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
+ 3. 弃用某个版本
+    * npm deprecate pkg-name@version messagge  其他同上
+ 4. 如果包不想维护了,可以转为npm 拥有
+    * 命令1 npm owner add npm <package-name>   
+    * 命令2 npm owner rm <user> <package-name> 
 ### 模块使用
-    1. npm install pkg-name@version
-    2. npm install pkg-name@version -g
-    3. npm update
-    4. npm outdated 输出版本信息
-    5. npm outdated -g --depth=0 查看全局的包的版本情况
+ 1. npm install pkg-name@version
+ 2. npm install pkg-name@version -g
+ 3. npm update
+ 4. npm outdated 输出版本信息
+ 5. npm outdated -g --depth=0 查看全局的包的版本情况
 
 ### 代码安全
-    1.npm audit 可以在当前扫描安装包,并生成报告
-    2.EAUDITNOLOCK错误处理
-        1. npm i --package-lock-only 生成package-lock.json
+ 1. npm audit 可以在当前扫描安装包,并生成报告
+ 2. EAUDITNOLOCK错误处理
+    * . npm i --package-lock-only 生成package-lock.json
 
 ### npm-config
-    1. npm config ls -l 查看npm配置的列表 -l是查看更多
-    2. 命令行输入 --foo=bar 设置foo为bar
-    3. 程序中通过 process.env.npm_config_foo来取值
-    4. .npmrc是npm 的一个配置文件
-    5. 获取package.json的配置项,process.env.npm_package_filedName 
-    6. npm config set foo:port 80 设置package.json name字段为foo的config字段的port值
+ 1. npm config ls -l 查看npm配置的列表 -l是查看更多
+ 2. 命令行输入 --foo=bar 设置foo为bar
+ 3. 程序中通过 process.env.npm_config_foo来取值
+ 4. .npmrc是npm 的一个配置文件
+ 5. 获取package.json的配置项,process.env.npm_package_filedName 
+ 6. npm config set foo:port 80 设置package.json name字段为foo的config字段的port值
 ### npm-script
-    1. package.json的scripts字段
-    2. 当依赖的模块含有可执行脚本,在npm install时候将会添加到node_moudles/.bin
+ 1. package.json的scripts字段
+ 2. 当依赖的模块含有可执行脚本,在npm install时候将会添加到node_moudles/.bin
 
 ### package.json
-    1. files字段, 是一个数组,包含的文件在npm pack 的时候会打成tarball,如果作为依赖包,可以供用户安装使用
-        *默认包含package.json/README/CHANGES / CHANGELOG / HISTORY/LICENSE / LICENCE/NOTICE/The file in the “main” field
-        *默认不包含......省略.....
+ 1. files字段, 是一个数组,包含的文件在npm pack 的时候会打成tarball,如果作为依赖包,可以供用户安装使用
+    * 默认包含package.json/README/CHANGES / CHANGELOG / HISTORY/LICENSE / LICENCE/NOTICE/The file in the “main” field
+    * 默认不包含......省略.....
