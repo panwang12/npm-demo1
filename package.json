@@ -3,9 +3,14 @@
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
-  "config" : { "port" : "8080" },
+  "bin": {
+    "info": "./bin/info.js"
+  },
+  "config": {
+    "port": "8080"
+  },
   "scripts": {
-    "start": "node index npm_config_foowwwwwwwwwwwwwwwwwwwwwwww=bar --SHOPwwwwwwwwwwwwwwwwwwwwww online",
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

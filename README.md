@@ -21,9 +21,9 @@
  * npm cache verify 检查缓存
  * ~/.npm 缓存文件保存位置
  ### npm-folder
- * ./node_modules 本地包位置 {prefix}/lib/node_modules(unix) {prefix}/node_modules(window) 全局包位置
+ * ./node_modules 本地包位置 
+ * {prefix}/lib/node_modules(unix) {prefix}/node_modules(window) 全局包位置
  * {prefix}/bin(unix) {prefix}(window)  可执行js文件的位置
-  备注:1 *如果是一个可执行的包需要在根目录有一个bin目录,package.json需要有一个 bin field*
 
 
 ### package的创建流程
@@ -44,12 +44,12 @@
 ### 弃用package
  1. 弃用安装包将在search result 检索不到,弃用提示会在package页面显示
  2. 弃用整个安装包
-    * npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
+  * npm deprecate pkg-name messagge  如果有使用 two-factor authentication 需要添加 --otp=123456
  3. 弃用某个版本
-    * npm deprecate pkg-name@version messagge  其他同上
+  * npm deprecate pkg-name@version messagge  其他同上
  4. 如果包不想维护了,可以转为npm 拥有
-    * 命令1 npm owner add npm <package-name>   
-    * 命令2 npm owner rm <user> <package-name> 
+  * 命令1 npm owner add npm <package-name>   
+  * 命令2 npm owner rm <user> <package-name> 
 ### 模块使用
  1. npm install pkg-name@version
  2. npm install pkg-name@version -g
@@ -60,7 +60,7 @@
 ### 代码安全
  1. npm audit 可以在当前扫描安装包,并生成报告
  2. EAUDITNOLOCK错误处理
-    * . npm i --package-lock-only 生成package-lock.json
+   * npm i --package-lock-only 生成package-lock.json
 
 ### npm-config
  1. npm config ls -l 查看npm配置的列表 -l是查看更多
@@ -75,5 +75,12 @@
 
 ### package.json
  1. files字段, 是一个数组,包含的文件在npm pack 的时候会打成tarball,如果作为依赖包,可以供用户安装使用
-    * 默认包含package.json/README/CHANGES / CHANGELOG / HISTORY/LICENSE / LICENCE/NOTICE/The file in the “main” field
-    * 默认不包含......省略.....
+  * 默认包含package.json/README/CHANGES / CHANGELOG / HISTORY/LICENSE / LICENCE/NOTICE/The file in the “main” field
+  * 默认不包含......省略.....
+ 2. bin 让js文件可执行 
+  * config包含 { "bin" : { "myapp" : "./cli.js" } }
+  * 可执行文件第一行 #!/usr/bin/env node, 保证可执行文件使用node执行
+  * 安装包时候创建symlink到 prefix/bin或者 ./node_modules/.bin/
+ 3. peerDependencies,如果当前包被当做依赖,当前环境需要安转peerdependencies
+
+
